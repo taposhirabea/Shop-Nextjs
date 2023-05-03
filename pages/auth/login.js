@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { useAuthContext } from '@/context/auth_context';
 import Link from "next/link";
 
 export default function login() {
