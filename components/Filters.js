@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import { useFilterContext } from '../context/filter_context'
-// import { getUniqueValues, formatPrice } from '../utils/helpers'
-// import { FaCheck } from 'react-icons/fa'
 
 const Filters = (props) => {
   const {items} = props;
@@ -17,7 +15,6 @@ const Filters = (props) => {
   } = useFilterContext()
 
   React.useLayoutEffect(() => {
-    let items = {...items}
     let newProducts = items.sort((a, b) => a.price - b.price);
     //const {  price } = filters;
     if (category !== "all") {
@@ -59,9 +56,10 @@ const Filters = (props) => {
 {/* select category */}
 <div className="form-control">
             <label htmlFor="category">category</label>
-            <select name="category" id="category" className="form-control"
+            <select name="category" id="category" 
              value={category}
              onChange={updateFilters}
+             className='active'
             >
                 <option value="all">All</option>
                 <option value="food">Food</option>

@@ -6,7 +6,7 @@ import Filters from '../Filters';
 
 export default function ProductList(props) {
     const {items} = props;
-    const {search} = Filters()
+    const {search} = useFilterContext()
    // const {products} = useProductsContext()
   return (
     <article >
