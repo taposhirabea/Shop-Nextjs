@@ -1,0 +1,79 @@
+/* contact section...... */
+
+.contactCenter {
+    background: var(--mainBlack);
+}
+.text {
+    color: var(--mainWhite);
+    font-size: 3.5rem;
+    margin: 2rem 0;
+}
+
+.line {
+    background: var(--clr-line);
+    height: 1px;
+    margin-left: 1.1rem;
+}
+
+.infoType {
+    border: none;
+    padding: 1rem;
+    background: var(--mainBlack);
+    font-size: 1.5rem;
+    outline: none;
+    color: var(--mainWhite);
+
+}
+
+.contactCenter {
+    background: var(--mainBlack);
+    border-color: var(--mainBlack);
+}
+
+.container {
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.img {
+    display: block;
+    width: 100%;
+}
+
+.btnCenter {
+    padding: 1.2rem;
+
+}
+
+.contactBtn {
+    font-size: 1.4rem;
+    border-radius: 34px;
+    padding: 1rem 2.5rem;
+    color: var(--mainWhite);
+    background: var(--clr-grey-5);
+}
+.contactBtn:hover {
+    color: var(--mainBlack);
+    background: var(--clr-grey-10);
+}
+
+@media (min-width: 576px) {
+    .contactCenter{
+    display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .container {
+        width: 80%;
+        padding: 1rem;
+        display: block;
+        padding-left: 5rem;
+    }
+
+    .infoType {
+        display: block;
+    }
+}
+
