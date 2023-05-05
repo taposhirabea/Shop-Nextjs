@@ -1,20 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react'
-import {
-  LOAD_PRODUCTS,
-  SET_GRIDVIEW,
-  SET_LISTVIEW,
-  UPDATE_SORT,
-  SORT_PRODUCTS,
-  UPDATE_FILTERS,
-  FILTER_PRODUCTS,
-  CLEAR_FILTERS,
-} from '../actions'
+import useSWR from 'swr';
 import reducer from '../Reducer/filter_reducer'
 import { getAllEvents } from '@/utils/api-util'
 
 const initialState = {
   filtered_products: [],
-  all_products: [],
+  // all_products: [],
   // sort: 'price-lowest',
   // filters: {
   //   // text: '',
@@ -31,24 +22,53 @@ export const FilterProvider = ({ children }) => {
   //const [state, dispatch] = useReducer(reducer, initialState)
    const [state, dispatch] = useState( initialState)
    const [sorted, setSorted] = React.useState([]);
+   const [genre, setGenre] = useState("");
   const [filters, setFilters] = React.useState({
     category: "all",
     price: "all",
+    all_products: [],
   });
+  const { data } = useSWR(
+    'https://redux-b78d9-default-rtdb.firebaseio.com/events.json',
+    (url) => fetch(url).then(res => res.json())
+  );
 
-  // useEffect(() => {
+  useEffect(() => {
+    if (data) {
+      const events = [];
 
-  //   let maxPrice = products.map((p) => p.price)
-  //  maxPrice = Math.max(...maxPrice)
-  //   return {
-  //     ...state,
-  //     all_products: [...products],
-  //     filtered_products: [...products],
-  //     filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
-  //   }
-  // })
-//   useEffect(() => {
-// filterProducts()
+      for (const key in data) {
+        events.push({
+          id: key,
+          ...data[key],
+        });
+      }
+
+      setSorted(events);
+      setFilters(events)
+    }
+  }, [data]);
+
+// useEffect(() => {
+  
+// let newProducts = getAllEvents.sort((a, b) => a.price - b.price);
+
+//     const {category, price} = filters
+//     if (category !== "all") {
+//       newProducts = newProducts.filter(item => item.category === category);
+//     }
+//     if (price !== "all") {
+//       newProducts = newProducts.filter(item => {
+//         if (price === 0) {
+//           return item.price < 300;
+//         } else if (price === 300) {
+//           return item.price > 300 && item.price < 650;
+//         } else {
+//           return item.price > 650;
+//         }
+        
+//       });
+//     }
 //   }, [filters])
 
   const updateFilters = e => {
@@ -66,6 +86,7 @@ export const FilterProvider = ({ children }) => {
     }
     setFilters({ ...filters, [name]: filterValue });
     setSearch(value)
+
   };
   const clearFilters = () => {
     // dispatch({ type: CLEAR_FILTERS })
@@ -84,6 +105,7 @@ export const FilterProvider = ({ children }) => {
         filters,
         sorted, setSorted,
         clearFilters,
+        setFilters
       }}
     >
       {children}

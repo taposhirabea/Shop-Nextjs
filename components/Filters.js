@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { useFilterContext } from '../context/filter_context'
+import { getAllEvents } from '@/utils/api-util';
 
-const Filters = (props) => {
-  const {items} = props;
+const Filters = ({items}) => {
+  // const {items} = props;
   const {
     filters: {
       price,
@@ -11,30 +12,22 @@ const Filters = (props) => {
     sorted,
     setSorted,
     updateFilters,
-    clearFilters,
+    clearFilters,setFilters
   } = useFilterContext()
 
-  React.useLayoutEffect(() => {
-    let newProducts = items.sort((a, b) => a.price - b.price);
-    //const {  price } = filters;
-    if (category !== "all") {
-      newProducts = newProducts.filter(item => item.category === category);
-    }
-    if (price !== "all") {
-      newProducts = newProducts.filter(item => {
-        if (price === 0) {
-          return item.price < 300;
-        } else if (price === 300) {
-          return item.price > 300 && item.price < 650;
-        } else {
-          return item.price > 650;
-        }
-        
-      });
-    }
-    setSorted(newProducts);
-  }, [items])
-
+// const handleCategory = (e) =>{
+//   let type = e.target.type;
+//   let name = e.target.name;
+//   let value = e.target.value;
+  
+//   let newProducts = items.sort((a, b) => a.price - b.price);
+//     //const {category, price} = filters
+//     if (category !== "all") {
+//       newProducts = newProducts.filter(item => item.category === category);
+//     }
+//     console.log(category)
+//     setFilters({ name, value, newProducts });
+// }
   return (
     <article>
       <div className='content'>
@@ -55,6 +48,7 @@ const Filters = (props) => {
 
 {/* select category */}
 <div className="form-control">
+
             <label htmlFor="category">category</label>
             <select name="category" id="category" 
              value={category}
@@ -70,15 +64,6 @@ const Filters = (props) => {
           {/* price */}
           <div className='form-control'>
             <h5>price</h5>
-            {/* <p className='price'>${price}</p>
-            <input
-              type='range'
-              name='price'
-              onChange={updateFilters}
-              min={min_price}
-              max={max_price}
-              value={price}
-            /> */}
             <label><input type="radio" name="price" value="all" 
                     checked={price === "all"} onChange={updateFilters}/>all</label>
                     <label><input type="radio" name="price" value="0" 

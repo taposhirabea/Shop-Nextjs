@@ -39,6 +39,7 @@
     "redux-thunk": "^2.4.2",
     "stripe": "^12.3.0",
     "styled-components": "^5.3.9",
+    "swr": "^2.1.5",
     "yup": "^1.0.2"
   }
 }

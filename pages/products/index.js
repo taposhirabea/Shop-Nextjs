@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
@@ -11,7 +11,7 @@ import { useProductsContext } from '@/context/products_context';
 function AllEventsPage(props) {
  const { events } = props;
  //const {events} = useProductsContext()
-
+ const [selectedGenre, setSelectedGenre] = useState("");
   return (
     <Fragment>
       
@@ -22,9 +22,10 @@ function AllEventsPage(props) {
       <section className='page'>
 
       <div className='products-center products'>
-          <Filters items={events}/>
+          <Filters items={events} selectedGenre={selectedGenre}
+            onSelect={setSelectedGenre}/>
           <div>
-          <ProductList items={events}/>
+          <ProductList items={events} selectedGenre={selectedGenre}/>
           </div>
         </div>
       </section>
