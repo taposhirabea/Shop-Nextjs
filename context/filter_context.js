@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react'
 import useSWR from 'swr';
-import reducer from '../Reducer/filter_reducer'
 import { getAllEvents } from '@/utils/api-util'
 
 const initialState = {
@@ -22,7 +21,6 @@ export const FilterProvider = ({ children }) => {
   //const [state, dispatch] = useReducer(reducer, initialState)
    const [state, dispatch] = useState( initialState)
    const [sorted, setSorted] = React.useState([]);
-   const [genre, setGenre] = useState("");
   const [filters, setFilters] = React.useState({
     category: "all",
     price: "all",
