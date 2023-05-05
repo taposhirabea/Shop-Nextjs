@@ -15,9 +15,9 @@ export default function ProductList({ items}) {
       {items
       .filter((item, category) => {
                 return (
-                  // search.toLowerCase() === ''
-                  // ? item
-                  // : item.name.toLowerCase().includes(search), 
+                  search.toLowerCase() === ''
+                  ? item
+                  : item.name.toLowerCase().includes(search), 
                   category === category || category === "all");
       })
       .map(product => {
